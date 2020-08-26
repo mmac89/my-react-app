@@ -2,17 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-// class Square extends React.Component {
-//       render() {
-//         return (
-//           <button className="square" 
-//           onClick= {()=> this.props.onClick()}
-//           >
-//             {this.props.value}
-//           </button>
-//         );
-//     }
-//   }
   function Square(props) {
     return (
         <button className="square" onClick=
@@ -33,18 +22,6 @@ import './index.css';
     }
   
     render() {
-      // const status = 'Next player: ' + 
-      // (this.state.xIsNext ? 'X' : 'O');
-      // const winner = 
-      //   calculateWinner(this.state.squares);
-      //     let status;
-      //     if (winner) {
-      //       status = 'Winner: '+ winner
-      //     } else {
-      //       status = 'Next player: ' + 
-      //       (this.state.xIsNext ? 'X' : 'O');
-      //     }
-
       return (
         <div>
           <div className="board-row">
@@ -83,8 +60,7 @@ import './index.css';
       this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
-      if (calculateWinner(squares) ||
-        squares[i]){
+      if (calculateWinner(squares) || squares[i]){
           return;
         }
       squares[i] = this.state.xIsNext ?'X': 'O';
@@ -126,6 +102,21 @@ import './index.css';
         let status;
         if (winner) {
           status = 'Winner: ' + winner; 
+          let winningLine= ()=>{
+            const lines = [
+              [0, 1, 2],
+              [3, 4, 5],
+              [6, 7, 8],
+              [0, 3, 6],
+              [1, 4, 7],
+              [2, 5, 8],
+              [0, 4, 8],
+              [2, 4, 6],
+            ];
+            if (current)
+          }
+        } else if(!winner && history.length> 9 ){
+          status = 'The game is a draw';
         } else {
           status = 'Next player: '+ 
           (this.state.xIsNext ? 'X' : 'O');

@@ -56,6 +56,7 @@ import './index.css';
         }],
         stepNumber: 0,
         xIsNext: true,
+        isDescending: true
       };
     }
     handleClick(i){
@@ -95,6 +96,12 @@ import './index.css';
       });
     }
 
+    sortHistory(){
+      this.setState({
+        isDescending: !this.state.isDescending
+      });
+    }
+
     render() {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
@@ -125,7 +132,8 @@ import './index.css';
           status = 'Next player: '+ 
           (this.state.xIsNext ? 'X' : 'O');
         }
-      return (
+      
+        return (
         <div className="game">
           <div className="game-board">
             <Board 
@@ -139,7 +147,10 @@ import './index.css';
           </div>
           <div className="game-info">
             <div>{ status }</div>
-            <ol>{ moves }</ol>
+            <ul>{this.state.isDescending ? moves : moves.reverse()}</ul>
+            <button onClick ={() => this.sortHistory()}>
+              Sort by: {this.state.isDescending ? "Descending" : "Asending"}
+            </button>
           </div>
         </div>
       );

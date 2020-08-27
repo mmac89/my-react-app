@@ -83,7 +83,8 @@ import './index.css';
     render() {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
-      const winner = calculateWinner(current.squares);
+      const results = calculateWinner(current.squares);
+      let winner;
 
       const moves = history.map((step, move) =>{ 
       
@@ -100,21 +101,14 @@ import './index.css';
       });
 
         let status;
-        if (winner) {
+        if (results) {
+          winner = results[0];
           status = 'Winner: ' + winner; 
-          let winningLine= ()=>{
-            const lines = [
-              [0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8],
-              [0, 3, 6],
-              [1, 4, 7],
-              [2, 5, 8],
-              [0, 4, 8],
-              [2, 4, 6],
-            ];
-            if (current)
-          }
+          // console.log(results[1]);
+          // for(let i=0; i< 9; i++){
+          //   if(current.squares[i] === results[1][i])
+          //   console.log(current.squares[i]);
+          // }
         } else if(!winner && history.length> 9 ){
           status = 'The game is a draw';
         } else {
@@ -162,7 +156,7 @@ import './index.css';
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        return [squares[a], lines[i]];
       }
     }
     return null;
